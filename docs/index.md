@@ -40,7 +40,7 @@ The main features of Scrapper are:
 And many other features:
 
 - **Stealth mode.** Various methods are used to make it difficult for websites to detect a Headless browser and bypass web scraping protection.
-- **Caching results.** All parsing results are saved to disk, and you can access them later by API without repeating the whole request.
+- **Caching results.** All parsing results are saved to disk or S3-compatible object storage, and you can access them later by API without repeating the whole request.
 - **Page screenshots.** Headless browsers don't have a window, but screenshots allow you to see the page as it appears to the parser. This is very useful!
 - **Incognito mode or persistent sessions.** You can configure the browser to work in incognito mode or without it. In this case, the browser will save session data such as cookies and local storage to disk. To use them again.
 - **Proxy support.** HTTP/SOCKS4/SOCKS5 proxy work is supported.

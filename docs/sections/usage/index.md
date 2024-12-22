@@ -35,7 +35,7 @@ drwxr-xr-x 2 1001 1001 4096 Mar 17 23:23 user_scripts
 
 ## Managing Scrapper Cache
 Over time, the Scrapper cache will grow in size, especially if you are making frequent requests with screenshots.
-The scrapper's cache is stored in the `user_data/_res` directory. You will need to set up automatic clearing of this directory yourself.
+The scrapper's cache is stored in the `user_data/_res` directory, or the configured S3-compatible bucket. You will need to set up automatic clearing of these files yourself.
 
 For example, you could add the following task to your cron jobs:
 ```console
@@ -44,7 +44,7 @@ find /path/to/user_data/_res -ctime +7 -delete
 This command will use the `find` utility to locate all files in the cache that were created more than 7 days ago. All such files will be deleted because the `find` utility accepts the `-delete` option.
 
 This is just an example of how you might deal with the scrapper's cache growing over time. You can come up with other strategies for this and implement them yourself.
-The main thing to remember is where Scrapper stores its cache data - it's in the `user_data/_res`.
+The main thing to remember is where Scrapper stores its cache data - by default it's in the `user_data/_res` directory.
 
 ## Using Scrapper
 Once the directories have been created and write permissions have been set, you can run Scrapper using the following command:
@@ -57,3 +57,27 @@ To connect to Scrapper logs, use the following command:
 ```console
 docker logs -f scrapper
 ```
+
+### Configuration
+Scrapper can be configured using environment variables. Here are the available options:
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+| `USER_DATA_DIR` | Directory for storing browser session data and cache | `./user_data` |
+| `USER_SCRIPTS_DIR` | Directory containing custom JavaScript scripts | `./user_scripts` |
+| `BROWSER_CONTEXT_LIMIT` | Maximum number of concurrent browser contexts | `20` |
+| `SCREENSHOT_TYPE` | Image format for screenshots (`jpeg` or `png`) | `jpeg` |
+| `SCREENSHOT_QUALITY` | Image quality for screenshots (0-100) | `80` |
+| `CACHE_TYPE` | Storage type for caching results (`filesystem` or `s3`) | `filesystem` |
+
+#### S3 Cache Configuration
+When using `CACHE_TYPE=s3`, the following S3 settings are required:
+
+| Variable | Description | Default |
+|:---------|:------------|:--------|
+| `S3_BUCKET` | S3 bucket name for storing cache | |
+| `S3_ACCESS_KEY` | S3 access key | |
+| `S3_SECRET_KEY` | S3 secret key | |
+| `S3_ENDPOINT_URL` | Optional endpoint URL for S3-compatible services | |
+
+These can be set in a `.env` file for docker compose, or passed to docker run using the `--env-file .env`.
