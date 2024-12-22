@@ -17,3 +17,7 @@ class Cache(ABC):
     @abstractmethod
     def load_result(self, key: str) -> Optional[Any]:
         pass
+
+    @abstractmethod
+    def screenshot_location(self, key: str) -> str:
+        pass

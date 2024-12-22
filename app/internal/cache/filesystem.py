@@ -44,3 +44,6 @@ class FileSystemCache(Cache):
         return (
             self.base_dir / "_res" / filename[:2] / (filename + "." + SCREENSHOT_TYPE)
         )
+
+    def screenshot_location(self, key: str) -> Path:
+        return self.base_dir / "_res" / key[:2] / (key + "." + SCREENSHOT_TYPE)

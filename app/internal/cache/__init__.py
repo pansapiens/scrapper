@@ -14,6 +14,7 @@ default_cache = get_cache()
 make_key = Cache.make_key
 dump_result = default_cache.dump_result
 load_result = default_cache.load_result
+screenshot_location = default_cache.screenshot_location
 
 __all__ = [
     "Cache",
@@ -22,4 +23,5 @@ __all__ = [
     "make_key",
     "dump_result",
     "load_result",
+    "screenshot_location",
 ]

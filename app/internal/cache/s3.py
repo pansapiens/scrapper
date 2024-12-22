@@ -60,3 +60,6 @@ class S3Cache(Cache):
             if e.response["Error"]["Code"] == "NoSuchKey":
                 return None
             raise
+
+    def screenshot_location(self, key: str) -> str:
+        return f"{self._key_path(key)}.png"
