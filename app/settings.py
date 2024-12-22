@@ -32,6 +32,15 @@ S3_BUCKET = os.getenv("S3_BUCKET")
 S3_ACCESS_KEY = os.getenv("S3_ACCESS_KEY")
 S3_SECRET_KEY = os.getenv("S3_SECRET_KEY")
 
+if CACHE_TYPE == "s3":
+    assert S3_BUCKET is not None, "S3_BUCKET must be set when CACHE_TYPE is 's3'"
+    assert (
+        S3_ACCESS_KEY is not None
+    ), "S3_ACCESS_KEY must be set when CACHE_TYPE is 's3'"
+    assert (
+        S3_SECRET_KEY is not None
+    ), "S3_SECRET_KEY must be set when CACHE_TYPE is 's3'"
+
 
 @cache
 def load_device_registry():
