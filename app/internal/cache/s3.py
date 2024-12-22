@@ -28,11 +28,14 @@ class S3Cache(Cache):
             ),
         )
 
+    def _key_path(self, key: str) -> str:
+        return f"{self.key_prefix}/{key[:2]}/{key}"
+
     def dump_result(
         self, data: Any, key: str, screenshot: Optional[bytes] = None
     ) -> None:
         # Save JSON data
-        json_key = f"{self.key_prefix}/{key[:2]}/{key}"
+        json_key = self._key_path(key)
         json_data = json.dumps(data, ensure_ascii=True)
         self.s3.put_object(
             Bucket=self.bucket,
@@ -43,7 +46,7 @@ class S3Cache(Cache):
 
         # Save screenshot if provided
         if screenshot:
-            screenshot_key = f"{self.key_prefix}/{key[:2]}/{key}.png"
+            screenshot_key = f"{self._key_path(key)}.png"
             self.s3.put_object(
                 Bucket=self.bucket,
                 Key=screenshot_key,
@@ -52,7 +55,7 @@ class S3Cache(Cache):
             )
 
     def load_result(self, key: str) -> Optional[Any]:
-        json_key = f"{self.key_prefix}/{key[:2]}/{key}"
+        json_key = self._key_path(key)
         try:
             response = self.s3.get_object(Bucket=self.bucket, Key=json_key)
             return json.loads(response["Body"].read().decode())
