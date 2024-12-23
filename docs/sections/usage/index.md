@@ -69,6 +69,7 @@ Scrapper can be configured using environment variables. Here are the available o
 | `SCREENSHOT_TYPE` | Image format for screenshots (`jpeg` or `png`) | `jpeg` |
 | `SCREENSHOT_QUALITY` | Image quality for screenshots (0-100) | `80` |
 | `CACHE_TYPE` | Storage type for caching results (`filesystem` or `s3`) | `filesystem` |
+| `LOGLEVEL` | Logging level (`debug`, `info`, `warning`, `error`, `critical`) | `info` |
 
 #### S3 Cache Configuration
 When using `CACHE_TYPE=s3`, the following S3 settings are required:

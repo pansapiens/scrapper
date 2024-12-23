@@ -6,12 +6,22 @@ from fastapi.templating import Jinja2Templates
 from playwright.async_api import Error as PlaywrightError
 
 from dependencies import lifespan
-from settings import TEMPLATES_DIR, STATIC_DIR, ICON_PATH
+from settings import LOGLEVEL, TEMPLATES_DIR, STATIC_DIR, ICON_PATH
 from routers import article, links, misc, any_page, results
 from version import revision
 
+# Configure logging before app creation
+logging.basicConfig(
+    level=LOGLEVEL,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[logging.StreamHandler()],
+)
+
+# Create logger for this module
+logger = logging.getLogger(__name__)
+
 # at startup
-print('revision:', revision)
+logger.info(f"revision: {revision}")
 
 
 app = FastAPI(
