@@ -19,7 +19,11 @@ STEALTH_SCRIPTS_DIR = SCRIPTS_DIR / "stealth"
 ICON_PATH = STATIC_DIR / "icons" / "favicon.ico"
 
 BROWSER_CONTEXT_LIMIT = int(os.environ.get("BROWSER_CONTEXT_LIMIT", 20))
-SCREENSHOT_TYPE = os.environ.get("SCREENSHOT_TYPE", "jpeg")  # jpeg, png
+SCREENSHOT_TYPE = os.environ.get("SCREENSHOT_TYPE", "jpeg").lower()
+assert SCREENSHOT_TYPE in (
+    "jpeg",
+    "png",
+), "SCREENSHOT_TYPE must be 'jpeg' or 'png' (not 'jpg')"
 SCREENSHOT_QUALITY = int(os.environ.get("SCREENSHOT_QUALITY", 80))  # 0-100
 
 
