@@ -3,6 +3,7 @@ import os
 from functools import cache
 from pathlib import Path
 
+LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 
 BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 USER_DATA_DIR = Path(os.environ.get("USER_DATA_DIR", BASE_DIR / "user_data"))
