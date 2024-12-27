@@ -57,7 +57,7 @@ async def get_any_page(
     host_url, full_path, query_dict = split_url(request.url)
 
     # get cache data if exists
-    r_id = cache.make_key(full_path)  # unique result ID
+    r_id = cache.make_key(request.url)  # unique result ID
     if common_params.cache:
         data = cache.load_result(key=r_id)
         if data:
